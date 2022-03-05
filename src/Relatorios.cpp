@@ -84,6 +84,17 @@ void Relatorios::distribuicao_sexo(list<Candidatos> &listCandidatosEleitos) cons
 
 }
 
+//tem que arrumar a historinha das viruglar aqui;
 void Relatorios::balanco_votos(list <Partidos> &listVotosPartidos) const{
+    int totalVotos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
 
+    for(const Partidos &it : listVotosPartidos){
+        totalVotos += it.getVotosTotal();
+        totalVotosLegenda += it.getVotosLegenda();
+        totalVotosNominais += (it.getVotosTotal() - it.getVotosLegenda());
+    }
+
+    cout <<"Total de votos válidos:    " << totalVotos << endl;
+    printf("Total de votos nominais:   %d (%.2f%%)\n",totalVotosNominais, 100*(static_cast <float> (totalVotosNominais))/(static_cast <float> (totalVotos)));
+    printf("Total de votos de legenda: %d (%.2f%%)\n\n\n", totalVotosLegenda, 100*(static_cast <float> (totalVotosLegenda))/(static_cast <float> (totalVotos)));
 }

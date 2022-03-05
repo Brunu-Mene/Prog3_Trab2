@@ -16,7 +16,7 @@ int main(int agrv, char **agrs){
     rl.numero_de_vagas(listCandidatosEleitos.size());
     rl.eleitos(listCandidatosEleitos,hashMap);
 
-
+    rl.balanco_votos(listVotosPartidos);
     //rg.printa_test(listCandidatos);
     //rg.printa_test2(listVotosPartidos);
 
