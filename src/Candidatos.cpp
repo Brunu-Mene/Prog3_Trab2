@@ -5,7 +5,7 @@ using namespace cpp_util;
 
 Candidatos::Candidatos(){}
 
-Candidatos::Candidatos(int numero_candidato, int votos_nominais,string &situacao, string &nome_candidato, string &nome_urna, string &sexo, string &data_nasc,int numero_partido){
+Candidatos::Candidatos(int numero_candidato, int votos_nominais,string &situacao, string &nome_candidato, string &nome_urna, string &sexo, string &data_nasc,int numero_partido, string sigla_partido){
     this->numero_partido = numero_partido;
     this->numero_candidato = numero_candidato;
     if(situacao == "Eleito"){
@@ -19,14 +19,13 @@ Candidatos::Candidatos(int numero_candidato, int votos_nominais,string &situacao
     this->sexo = sexo[0];
     this->nome_candidato = nome_candidato;
     this->nome_urna = nome_urna;
-    
     this->data_nasc = parseDate(data_nasc,DATE_FORMAT_PT_BR_SHORT);
+    this->sigla_partido = sigla_partido;
 }
 
-void Candidatos::printaCandidato(map<int,Partidos> &hashMap) const{
+void Candidatos::printaCandidato() const{
     cout << nome_candidato << " / " << nome_urna << " (" << 
-                hashMap[numero_partido].getSigla() << 
-                    ", " << votos_nominais;
+                sigla_partido << ", " << votos_nominais;
     votos_nominais != 1 ? cout << " votos)\n" : cout << " voto)\n";
 }
 
@@ -60,4 +59,8 @@ time_t Candidatos::getdata_nasc() const{
 
 char Candidatos::getSexo() const{
     return sexo;
+}
+
+string Candidatos::getSigla_Partido() const{
+    return sigla_partido;
 }

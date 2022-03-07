@@ -9,51 +9,50 @@ void numero_de_vagas(const int nVagas){
     cout << "Número de vagas: " << nVagas << endl << endl;
 }
 
-void eleitos(const list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap){
+void eleitos(const list<Candidatos> &listCandidatosEleitos){
     cout << "Vereadores eleitos:" << endl;
     list<Candidatos>::iterator it;
     Candidatos aux;
     int i = 1;
     for (const Candidatos &it : listCandidatosEleitos){
         cout << i << " - ";
-        it.printaCandidato(hashMap);
+        it.printaCandidato();
         i++;
     }
     cout << endl;
 }
 
-void mais_votados(const list<Candidatos> &listCandidatos, const int nEleitos, map<int,Partidos> &hashMap){
+void mais_votados(const list<Candidatos> &listCandidatos, const int nEleitos){
     int i = 1;
     cout << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
     for(const Candidatos &it : listCandidatos){
         if(i > nEleitos) break;
         cout << i << " - ";
-        it.printaCandidato(hashMap);
+        it.printaCandidato();
         i++;
     }
     cout << endl;
 }
 
-void eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas, map<int,Partidos> &hashMap){
+void eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas){
     cout << "Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:" <<
                 "\n(com sua posição no ranking de mais votados)" << endl;
     int i = 1;
     for(const Candidatos &it : listCandidatos){
         if(it.getSituacao() != 'E' && i <= nVagas){
             cout << i << " - ";
-            it.printaCandidato(hashMap);
+            it.printaCandidato();
         }else if(i > nVagas) break;
         i++;
     }
     cout << endl;
 }
 
-void nao_eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas, map<int,Partidos> &hashMap){
+void nao_eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas){
     cout << "Eleitos, que se beneficiaram do sistema proporcional:" <<
                 "\n(com sua posição no ranking de mais votados)" << endl;
     int i = 1;
 
-    //nao sei se a posição de acesso ta realmente, testar depois
     auto candidatoAux = listCandidatos.begin();
     advance(candidatoAux, nVagas - 1);
 
@@ -61,7 +60,7 @@ void nao_eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const in
         if(it.getSituacao() == 'E'){
             if(it.getVotos_Nominais() < candidatoAux->getVotos_Nominais()){
                 cout << i << " - ";
-                it.printaCandidato(hashMap);
+                it.printaCandidato();
             }
         }
         i++;
@@ -118,7 +117,7 @@ void votos_de_legenda(const list<Partidos> &listVotosPartidos){
     cout << endl;
 }
 
-void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap){
+void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos){
     list<Candidatos> maisVotados, menosVotados;
 
     for(const Partidos &it : listVotosPartidos){
@@ -141,7 +140,7 @@ void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &
     int i = 1;
     cout << "Primeiro e último colocados de cada partido:" << endl;
     for(const Candidatos &it : maisVotados){
-        cout << i << " - " << hashMap[it.getNumero_Partido()].getSigla() << " - " << it.getNumero_Partido() <<
+        cout << i << " - " << it.getSigla_Partido() << " - " << it.getNumero_Partido() <<
                     ", " << it.getNome_Urna() << " (" << it.getNumero_Candidato() << ", " 
                         << it.getVotos_Nominais();
         it.getVotos_Nominais() > 1 ? cout << " votos)" : cout << " voto)";

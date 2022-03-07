@@ -2,11 +2,11 @@
 
 namespace registrador{
 
-void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidatos> &listCandidatosEleitos, const char *caminho){
+void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap, const char *caminho){
     fstream file;
     file.open(caminho,ios::in);
     if(!file.is_open()){
-        cout <<"Erro na abertura do arquivo" << endl;
+        cout <<"Erro na abertura do arquivo." << endl;
         exit(1);
     }
 
@@ -27,9 +27,8 @@ void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidato
         separador[8] = line;
         if(separador[7] == "Válido"){
             Candidatos candidato(stoi(separador[0]),stoi(separador[1]),separador[2]
-                                  ,separador[3],separador[4],separador[5],separador[6],
-                                  stoi(separador[8]));
-                            
+                                  ,separador[3],separador[4],separador[5],separador[6],stoi(separador[8]),
+                                    hashMap[stoi(separador[8])].getSigla());
             listCandidatos.push_back(candidato);
             if(separador[2] == "Eleito"){
                 listCandidatosEleitos.push_back(candidato);
@@ -43,7 +42,7 @@ void preenche_hashmap_partidos(map<int,Partidos> &hashMap, const char *caminho){
     fstream file;
     file.open(caminho,ios::in);
     if(!file.is_open()){
-        cout << "Erro na abertura do arquivo" << endl;
+        cout << "Erro na abertura do arquivo." << endl;
         exit(1);
     }
 
