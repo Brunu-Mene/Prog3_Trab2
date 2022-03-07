@@ -90,25 +90,3 @@ void Registrador::preenche_lista_votos_partidos(list<Candidatos> &listCandidatos
         }
     }
 }
-
-void Registrador::printa_test(list<Candidatos> &listCandidatos){
-    //Create an iterator of std::list
-    list<Candidatos>::iterator it;
-    // Make iterate point to begining and incerement it one by one till it reaches the end of list.
-    for (it = listCandidatos.begin(); it != listCandidatos.end(); it++)
-    {
-        cout << "Numero:" << it->getNumero_Candidato()<< ",VT: " << it->getVotos_Nominais() << 
-            ",Situation: "<< it->getSituacao() << ",Nome: " << it->getNome_Urna() << endl;
-    }
-}
-
-
-void Registrador::printa_test2(list<Partidos> &listPartidos){
-
-    list<Partidos>::iterator it;
-    for (it = listPartidos.begin(); it != listPartidos.end(); it++){
-        cout << "N° partido: " << it->getNumero() << ", Votos Legenda: " << it->getVotosLegenda();
-        cout << ", Nome: " << it->getNome() << ", Sigla: " << it->getSigla() << ", Votos Totais: ";
-        cout << it->getVotosTotal() << endl;
-    }
-}
