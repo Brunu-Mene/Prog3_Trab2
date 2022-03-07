@@ -1,6 +1,7 @@
 #include "../include/Relatorios.h"
 #include "../include/DateUtils.h"
 #include "../include/Compara.h"
+#include "../include/NumberUtils.h"
 
 namespace relatorios{
 using namespace cpp_util;
@@ -109,7 +110,8 @@ void votos_de_legenda(const list<Partidos> &listVotosPartidos){
         if(it.getVotosLegenda() == 0){
             cout << "proporção não calculada, " << it.getVotosTotal() << " voto no partido)" << endl;
         }else{
-            printf("%.2f%% do total do partido)\n", 100*(static_cast <float> (it.getVotosLegenda())/static_cast <float> (it.getVotosTotal())));
+            cout << formatDoubleCurrency(100*(static_cast <double> (it.getVotosLegenda())/static_cast <double> (it.getVotosTotal())), LOCALE_PT_BR) <<
+                "% do total do partido)" << endl;
         }
 
         i++;
@@ -159,7 +161,6 @@ void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &
     cout << endl;
 }
 
-//tem que arrumar a historinha das viruglar aqui;
 void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const string &dataEleicao){
     int intervalo1 = 0, intervalo2 = 0, intervalo3 = 0, intervalo4 = 0, intervalo5 = 0;
     time_t eleicao = parseDate(dataEleicao,DATE_FORMAT_PT_BR_SHORT);
@@ -174,14 +175,13 @@ void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const str
         else intervalo5++;
     }
     cout << "Eleitos, por faixa etária (na data da eleição):" << endl;
-    printf("      Idade < 30: %d (%.2f%%)\n",intervalo1,100*(static_cast <float>(intervalo1))/static_cast <float>(listCandidatosEleitos.size()));
-    printf("30 <= Idade < 40: %d (%.2f%%)\n",intervalo2,100*(static_cast <float>(intervalo2))/static_cast <float>(listCandidatosEleitos.size()));
-    printf("40 <= Idade < 50: %d (%.2f%%)\n",intervalo3,100*(static_cast <float>(intervalo3))/static_cast <float>(listCandidatosEleitos.size()));
-    printf("50 <= Idade < 60: %d (%.2f%%)\n",intervalo4,100*(static_cast <float>(intervalo4))/static_cast <float>(listCandidatosEleitos.size()));
-    printf("60 <= Idade     : %d (%.2f%%)\n\n",intervalo5,100*(static_cast <float>(intervalo5))/static_cast <float>(listCandidatosEleitos.size()));
+    cout << "      Idade < 30: " << intervalo1 << " (" << formatDoubleCurrency(100*(static_cast <double>(intervalo1))/static_cast <double>(listCandidatosEleitos.size()),LOCALE_PT_BR) << "%)\n";
+    cout << "30 <= Idade < 40: " << intervalo2 << " (" << formatDoubleCurrency(100*(static_cast <double>(intervalo2))/static_cast <double>(listCandidatosEleitos.size()),LOCALE_PT_BR) << "%)\n";
+    cout << "40 <= Idade < 50: " << intervalo3 << " (" << formatDoubleCurrency(100*(static_cast <double>(intervalo3))/static_cast <double>(listCandidatosEleitos.size()),LOCALE_PT_BR) << "%)\n";
+    cout << "50 <= Idade < 60: " << intervalo4 << " (" << formatDoubleCurrency(100*(static_cast <double>(intervalo4))/static_cast <double>(listCandidatosEleitos.size()),LOCALE_PT_BR) << "%)\n";
+    cout << "60 <= Idade     : " << intervalo5 << " (" << formatDoubleCurrency(100*(static_cast <double>(intervalo5))/static_cast <double>(listCandidatosEleitos.size()),LOCALE_PT_BR) << "%)\n\n";
 }
 
-//tem que arrumar a historinha das viruglar aqui;
 void distribuicao_sexo(const list<Candidatos> &listCandidatosEleitos){
     int candidatosM = 0, candidatosF = 0;
 
@@ -191,11 +191,10 @@ void distribuicao_sexo(const list<Candidatos> &listCandidatosEleitos){
     }
 
     cout << "Eleitos, por sexo:" << endl;
-    printf("Feminino:  %d (%.2f%%)\n", candidatosF, 100*(static_cast <float> (candidatosF))/(static_cast <float> (listCandidatosEleitos.size())));;
-    printf("Masculino: %d (%.2f%%)\n\n", candidatosM, 100*(static_cast <float> (candidatosM))/(static_cast <float> (listCandidatosEleitos.size())));
+    cout << "Feminino:  " << candidatosF << " (" << formatDoubleCurrency(100*(static_cast <double> (candidatosF))/(static_cast <double> (listCandidatosEleitos.size())),LOCALE_PT_BR) << "%)\n";
+    cout << "Masculino: " << candidatosM << " (" << formatDoubleCurrency(100*(static_cast <double> (candidatosM))/(static_cast <double> (listCandidatosEleitos.size())),LOCALE_PT_BR) << "%)\n\n";
 }
 
-//tem que arrumar a historinha das viruglar aqui;
 void balanco_votos(const list <Partidos> &listVotosPartidos){
     int totalVotos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
 
@@ -206,8 +205,8 @@ void balanco_votos(const list <Partidos> &listVotosPartidos){
     }
 
     cout <<"Total de votos válidos:    " << totalVotos << endl;
-    printf("Total de votos nominais:   %d (%.2f%%)\n",totalVotosNominais, 100*(static_cast <float> (totalVotosNominais))/(static_cast <float> (totalVotos)));
-    printf("Total de votos de legenda: %d (%.2f%%)\n\n\n", totalVotosLegenda, 100*(static_cast <float> (totalVotosLegenda))/(static_cast <float> (totalVotos)));
+    cout <<"Total de votos nominais:   "<< totalVotosNominais << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosNominais))/(static_cast <double> (totalVotos)), LOCALE_PT_BR) << "%)\n";
+    cout <<"Total de votos de legenda: " << totalVotosLegenda << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosLegenda))/(static_cast <double> (totalVotos)), LOCALE_PT_BR)  << "%)\n\n\n";
 }
 
 }
