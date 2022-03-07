@@ -6,7 +6,7 @@ void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidato
     fstream file;
     file.open(caminho,ios::in);
     if(!file.is_open()){
-        cout <<"Erro na abertura do arquivo." << endl;
+        cout <<"Erro na abertura do arquivo de candidatos." << endl;
         exit(1);
     }
 
@@ -42,7 +42,7 @@ void preenche_hashmap_partidos(map<int,Partidos> &hashMap, const char *caminho){
     fstream file;
     file.open(caminho,ios::in);
     if(!file.is_open()){
-        cout << "Erro na abertura do arquivo." << endl;
+        cout << "Erro na abertura do arquivo de partidos." << endl;
         exit(1);
     }
 
