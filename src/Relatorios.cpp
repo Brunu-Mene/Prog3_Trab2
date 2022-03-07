@@ -84,7 +84,7 @@ void Relatorios::votos_partido(list<Candidatos> &listCandidatos, list<Partidos> 
         cout << i << " - ";
         it.printaPartido();
         cout << ", " << it.getVotosTotal();
-        it.getVotosTotal() > 1 ? cout << " votos " : cout << " voto (";
+        it.getVotosTotal() > 1 ? cout << " votos (" : cout << " voto (";
         cout << (it.getVotosTotal() - it.getVotosLegenda());
         (it.getVotosTotal() - it.getVotosLegenda()) > 1 ? cout << " nominais e " : cout << " nominal e ";
         cout << it.getVotosLegenda() << " de legenda), " << matEleitosPartido[it.getNumero()][0];
