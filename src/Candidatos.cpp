@@ -1,4 +1,7 @@
 #include "Candidatos.h"
+#include "DateUtils.h"
+
+using namespace cpp_util;
 
 Candidatos::Candidatos(){}
 
@@ -16,7 +19,8 @@ Candidatos::Candidatos(int numero_candidato, int votos_nominais,string &situacao
     this->sexo = sexo[0];
     this->nome_candidato = nome_candidato;
     this->nome_urna = nome_urna;
-    this->data_nasc = data_nasc;
+    
+    this->data_nasc = parseDate(data_nasc,DATE_FORMAT_PT_BR_SHORT);
 }
 
 void Candidatos::printaCandidato(map<int,Partidos> &hashMap) const{
@@ -50,18 +54,10 @@ char Candidatos::getSituacao() const{
     return situacao;
 }
 
-string Candidatos::getdata_nasc() const{
+time_t Candidatos::getdata_nasc() const{
     return data_nasc;
 }
 
 char Candidatos::getSexo() const{
     return sexo;
 }
-
-/*int Candidatos::compareTo(Candidatos &c){
-        if(c.votos_nominais - votos_nominais == 0){
-            //return c.data_nasc.compareTo(this.data_nasc)*(-1);
-            //retorno da comparação entre idades;
-        }
-        return c.votos_nominais - votos_nominais;
-    }*/

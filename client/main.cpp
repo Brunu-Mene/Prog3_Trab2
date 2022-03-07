@@ -14,11 +14,25 @@ int main(int agrv, char **agrs){
     rg.preenche_lista_votos_partidos(listCandidatos,hashMap,listVotosPartidos);
 
     rl.numero_de_vagas(listCandidatosEleitos.size());
-    rl.eleitos(listCandidatosEleitos,hashMap);
 
+    listCandidatosEleitos.sort(compara_candidato());
+    listCandidatos.sort(compara_candidato());
+
+    rl.eleitos(listCandidatosEleitos,hashMap);
+    rl.mais_votados(listCandidatos, listCandidatosEleitos.size(), hashMap);
+    rl.eleitos_se_majoritario(listCandidatos, listCandidatosEleitos.size(), hashMap);
+    rl.nao_eleitos_se_majoritario(listCandidatos, listCandidatosEleitos.size(), hashMap);
+
+    listVotosPartidos.sort(compara_vt_np());
+    rl.votos_partido(listCandidatos, listVotosPartidos);
+
+    listVotosPartidos.sort(compara_vt_vl_np());
+    rl.votos_de_legenda(listVotosPartidos);
+    rl.primeiro_ultimo(listVotosPartidos,listCandidatos,hashMap);
+    string dataEleicao = "15/11/2020";
+    rl.distribuicao_idade(listCandidatosEleitos,dataEleicao);
+    rl.distribuicao_sexo(listCandidatosEleitos);
     rl.balanco_votos(listVotosPartidos);
-    //rg.printa_test(listCandidatos);
-    //rg.printa_test2(listVotosPartidos);
 
     return 0;
 }
