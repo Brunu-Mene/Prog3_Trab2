@@ -22,35 +22,4 @@ class Partidos{
         int getVotosTotal()const;
 };
 
-struct compara_vt_np{
-    bool operator ()(const Partidos &p1, const Partidos &p2){
-        if(p1.getVotosTotal() == p2.getVotosTotal()){
-            if(p1.getNumero() > p2.getNumero()) 
-                return false;
-            return true;
-        }
-        if(p2.getVotosTotal() > p1.getVotosTotal()) 
-            return false;
-        return true;
-    }
-};
-
-struct compara_vt_vl_np{
-    bool operator ()(const Partidos &p1, const Partidos &p2){
-        if(p1.getVotosLegenda() == p2.getVotosLegenda()){
-            if(p1.getVotosTotal() - p1.getVotosLegenda() == p2.getVotosTotal() - p2.getVotosLegenda()){
-                if(p1.getNumero() > p2.getNumero()) 
-                    return false;
-                return true;
-            }
-            if((p2.getVotosTotal() - p2.getVotosLegenda()) > (p1.getVotosTotal() - p1.getVotosLegenda()))
-                return false;
-            return true;
-        }
-        if(p2.getVotosLegenda() > p1.getVotosLegenda())
-            return false;
-        return true;
-    }
-};
-
 #endif

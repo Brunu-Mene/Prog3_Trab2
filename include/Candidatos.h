@@ -28,29 +28,4 @@ class Candidatos{
         char getSexo() const;
 };
 
-// MANO KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-// ARRANJAR UM JEITO DE FAZER ISSO CERTO, PQ IMPOSSIVEL Q ISSO SEJA ACEITÁVEL
-//macaquice.
-struct compara_candidato{
-    bool operator ()(const Candidatos &c1, const Candidatos &c2){
-        if(c1.getVotos_Nominais() == c2.getVotos_Nominais()){
-            if(c2.getdata_nasc() > c1.getdata_nasc()) return true;
-            return false;
-        }
-        if(c2.getVotos_Nominais() > c1.getVotos_Nominais()) return false;
-        return true;
-    }
-};
-
-struct compara_vn_np{
-    bool operator()(const Candidatos &c1, const Candidatos &c2){
-        if(c1.getVotos_Nominais() == c2.getVotos_Nominais()){
-            if(c1.getNumero_Partido() > c2.getNumero_Partido()) return false;
-            return true;
-        }
-        if(c2.getVotos_Nominais() > c1.getVotos_Nominais()) return false;
-        return true;
-    }
-};
-
 #endif

@@ -1,13 +1,15 @@
 #include "../include/Relatorios.h"
 #include "../include/DateUtils.h"
+#include "../include/Compara.h"
 
+namespace relatorios{
 using namespace cpp_util;
 
-void Relatorios::numero_de_vagas(int nVagas) const{
+void numero_de_vagas(const int nVagas){
     cout << "Número de vagas: " << nVagas << endl << endl;
 }
 
-void Relatorios::eleitos(list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap) const{
+void eleitos(const list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap){
     cout << "Vereadores eleitos:" << endl;
     list<Candidatos>::iterator it;
     Candidatos aux;
@@ -20,7 +22,7 @@ void Relatorios::eleitos(list<Candidatos> &listCandidatosEleitos, map<int,Partid
     cout << endl;
 }
 
-void Relatorios::mais_votados(list<Candidatos> &listCandidatos, int nEleitos, map<int,Partidos> &hashMap) const{
+void mais_votados(const list<Candidatos> &listCandidatos, const int nEleitos, map<int,Partidos> &hashMap){
     int i = 1;
     cout << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
     for(const Candidatos &it : listCandidatos){
@@ -32,7 +34,7 @@ void Relatorios::mais_votados(list<Candidatos> &listCandidatos, int nEleitos, ma
     cout << endl;
 }
 
-void Relatorios::eleitos_se_majoritario(list<Candidatos> &listCandidatos,int nVagas, map<int,Partidos> &hashMap) const{
+void eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas, map<int,Partidos> &hashMap){
     cout << "Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:" <<
                 "\n(com sua posição no ranking de mais votados)" << endl;
     int i = 1;
@@ -46,7 +48,7 @@ void Relatorios::eleitos_se_majoritario(list<Candidatos> &listCandidatos,int nVa
     cout << endl;
 }
 
-void Relatorios::nao_eleitos_se_majoritario(list<Candidatos> &listCandidatos, int nVagas, map<int,Partidos> &hashMap) const{
+void nao_eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas, map<int,Partidos> &hashMap){
     cout << "Eleitos, que se beneficiaram do sistema proporcional:" <<
                 "\n(com sua posição no ranking de mais votados)" << endl;
     int i = 1;
@@ -67,15 +69,15 @@ void Relatorios::nao_eleitos_se_majoritario(list<Candidatos> &listCandidatos, in
     cout << endl;
 }
 
-void Relatorios::votos_partido(list<Candidatos> &listCandidatos, list<Partidos> &listVotosPartidos) const{
-    int matEleitosPartido[100][1];
+void votos_partido(const list<Candidatos> &listCandidatos, const list<Partidos> &listVotosPartidos){
+    map<int,int> eleitosPartido;
 
     for(int i = 0; i<100 ;i++){
-        matEleitosPartido[i][0] = 0;
+        eleitosPartido[i] = 0;
     }
     for(const Candidatos &it : listCandidatos){
         if(it.getSituacao() == 'E')
-            matEleitosPartido[it.getNumero_Partido()][0]++;
+            eleitosPartido[it.getNumero_Partido()]++;
     }
 
     int i = 1;
@@ -87,15 +89,15 @@ void Relatorios::votos_partido(list<Candidatos> &listCandidatos, list<Partidos> 
         it.getVotosTotal() > 1 ? cout << " votos (" : cout << " voto (";
         cout << (it.getVotosTotal() - it.getVotosLegenda());
         (it.getVotosTotal() - it.getVotosLegenda()) > 1 ? cout << " nominais e " : cout << " nominal e ";
-        cout << it.getVotosLegenda() << " de legenda), " << matEleitosPartido[it.getNumero()][0];
-        matEleitosPartido[it.getNumero()][0] > 1 ? cout << " candidatos eleitos" << endl: cout << " candidato eleito" << endl;
+        cout << it.getVotosLegenda() << " de legenda), " << eleitosPartido[it.getNumero()];
+        eleitosPartido[it.getNumero()] > 1 ? cout << " candidatos eleitos" << endl: cout << " candidato eleito" << endl;
         i++;
     }
     cout << endl;
 }
 
 //tem que arrumar a historinha das viruglar aqui;
-void Relatorios::votos_de_legenda(list<Partidos> &listVotosPartidos) const{
+void votos_de_legenda(const list<Partidos> &listVotosPartidos){
     int i = 1;
     cout << "Votação dos partidos (apenas votos de legenda):" << endl;
 
@@ -116,7 +118,7 @@ void Relatorios::votos_de_legenda(list<Partidos> &listVotosPartidos) const{
     cout << endl;
 }
 
-void Relatorios::primeiro_ultimo(list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap) const{
+void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap){
     list<Candidatos> maisVotados, menosVotados;
 
     for(const Partidos &it : listVotosPartidos){
@@ -158,7 +160,8 @@ void Relatorios::primeiro_ultimo(list<Partidos> &listVotosPartidos, list<Candida
     cout << endl;
 }
 
-void Relatorios::distribuicao_idade(list<Candidatos> &listCandidatosEleitos, string &dataEleicao) const{
+//tem que arrumar a historinha das viruglar aqui;
+void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const string &dataEleicao){
     int intervalo1 = 0, intervalo2 = 0, intervalo3 = 0, intervalo4 = 0, intervalo5 = 0;
     time_t eleicao = parseDate(dataEleicao,DATE_FORMAT_PT_BR_SHORT);
 
@@ -180,7 +183,7 @@ void Relatorios::distribuicao_idade(list<Candidatos> &listCandidatosEleitos, str
 }
 
 //tem que arrumar a historinha das viruglar aqui;
-void Relatorios::distribuicao_sexo(list<Candidatos> &listCandidatosEleitos) const{
+void distribuicao_sexo(const list<Candidatos> &listCandidatosEleitos){
     int candidatosM = 0, candidatosF = 0;
 
     for(const Candidatos &it : listCandidatosEleitos){
@@ -194,7 +197,7 @@ void Relatorios::distribuicao_sexo(list<Candidatos> &listCandidatosEleitos) cons
 }
 
 //tem que arrumar a historinha das viruglar aqui;
-void Relatorios::balanco_votos(list <Partidos> &listVotosPartidos) const{
+void balanco_votos(const list <Partidos> &listVotosPartidos){
     int totalVotos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
 
     for(const Partidos &it : listVotosPartidos){
@@ -206,4 +209,6 @@ void Relatorios::balanco_votos(list <Partidos> &listVotosPartidos) const{
     cout <<"Total de votos válidos:    " << totalVotos << endl;
     printf("Total de votos nominais:   %d (%.2f%%)\n",totalVotosNominais, 100*(static_cast <float> (totalVotosNominais))/(static_cast <float> (totalVotos)));
     printf("Total de votos de legenda: %d (%.2f%%)\n\n\n", totalVotosLegenda, 100*(static_cast <float> (totalVotosLegenda))/(static_cast <float> (totalVotos)));
+}
+
 }

@@ -6,19 +6,18 @@
 #include <list>
 #include <map>
 
-class Relatorios{
-    public:
-        void numero_de_vagas (int nVagas) const;
-        void eleitos(list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap) const;
-        void mais_votados(list<Candidatos> &listCandidatos, int nEleitos, map<int,Partidos> &hashMap) const;
-        void eleitos_se_majoritario(list<Candidatos> &listCandidatos,int nVagas, map<int,Partidos> &hashMap) const;
-        void nao_eleitos_se_majoritario(list<Candidatos> &listCandidatos, int nVagas, map<int,Partidos> &hashMap) const;
-        void votos_partido(list<Candidatos> &listCandidatos, list<Partidos> &listVotosPartidos) const;
-        void votos_de_legenda(list<Partidos> &listVotosPartidos) const;
-        void primeiro_ultimo(list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap) const;
-        void distribuicao_idade(list<Candidatos> &listCandidatosEleitos, string &dataEleicao) const;
-        void distribuicao_sexo(list<Candidatos> &listCandidatosEleitos) const;
-        void balanco_votos(list <Partidos> &listVotosPartidos) const;
+namespace relatorios{
+    void numero_de_vagas (const int nVagas);
+    void eleitos(const list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap);
+    void mais_votados(const list<Candidatos> &listCandidatos, const int nEleitos, map<int,Partidos> &hashMap);
+    void eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas, map<int,Partidos> &hashMap);
+    void nao_eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const int nVagas, map<int,Partidos> &hashMap);
+    void votos_partido(const list<Candidatos> &listCandidatos, const list<Partidos> &listVotosPartidos);
+    void votos_de_legenda(const list<Partidos> &listVotosPartidos);
+    void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap);
+    void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const string &dataEleicao);
+    void distribuicao_sexo(const list<Candidatos> &listCandidatosEleitos);
+    void balanco_votos(const list <Partidos> &listVotosPartidos);
 };
 
 #endif

@@ -1,7 +1,8 @@
 #include "../include/Registrador.h"
 
+namespace registrador{
 
-void Registrador::preenche_listas_candidatos(list<Candidatos> &listCandidatos,list<Candidatos> &listCandidatosEleitos,char *caminho){
+void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidatos> &listCandidatosEleitos, const char *caminho){
     fstream file;
     file.open(caminho,ios::in);
     if(!file.is_open()){
@@ -38,7 +39,7 @@ void Registrador::preenche_listas_candidatos(list<Candidatos> &listCandidatos,li
     file.close();
 }
 
-void Registrador::preenche_hashmap_partidos(map<int,Partidos> &hashMap, char *caminho){
+void preenche_hashmap_partidos(map<int,Partidos> &hashMap, const char *caminho){
     fstream file;
     file.open(caminho,ios::in);
     if(!file.is_open()){
@@ -68,15 +69,15 @@ void Registrador::preenche_hashmap_partidos(map<int,Partidos> &hashMap, char *ca
     file.close();
 }
 
-void Registrador::preenche_lista_votos_partidos(list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap, list<Partidos> &listVotosPartidos){
-    int matVotosPartidos[100][1];
+void preenche_lista_votos_partidos(const list<Candidatos> &listCandidatos, map<int,Partidos> &hashMap, list<Partidos> &listVotosPartidos){
+    map<int, int> votosPartidos;
 
     for(int i=0; i<100 ;i++){
-        matVotosPartidos[i][0] = 0;
+        votosPartidos[i] = 0;
     }
 
     for (const Candidatos &it : listCandidatos){
-        matVotosPartidos[it.getNumero_Partido()][0] += it.getVotos_Nominais();
+        votosPartidos[it.getNumero_Partido()] += it.getVotos_Nominais();
     }
 
     for(int i=0; i<100 ;i++){
@@ -84,9 +85,11 @@ void Registrador::preenche_lista_votos_partidos(list<Candidatos> &listCandidatos
             string nome = hashMap[i].getNome();
             string sigla = hashMap[i].getSigla();
             Partidos partido(i,hashMap[i].getVotosLegenda(),nome,sigla,
-                                hashMap[i].getVotosLegenda() + matVotosPartidos[i][0]);
+                                hashMap[i].getVotosLegenda() + votosPartidos[i]);
             
             listVotosPartidos.push_back(partido);
         }
     }
+}
+
 }
