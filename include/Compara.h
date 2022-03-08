@@ -1,3 +1,6 @@
+#ifndef COMPARA_H
+#define COMPARA_H
+
 #include "Candidatos.h"
 using namespace std;
 
@@ -20,3 +23,5 @@ class compara_vt_vl_np{
     public:
     bool operator ()(const Partidos &p1, const Partidos &p2);
 };
+
+#endif

@@ -12,8 +12,6 @@ void numero_de_vagas(const int nVagas){
 
 void eleitos(const list<Candidatos> &listCandidatosEleitos){
     cout << "Vereadores eleitos:" << endl;
-    list<Candidatos>::iterator it;
-    Candidatos aux;
     int i = 1;
     for (const Candidatos &it : listCandidatosEleitos){
         cout << i << " - ";
@@ -167,7 +165,7 @@ void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const str
 
     for(const Candidatos &it : listCandidatosEleitos){
         time_t diff = difftime(eleicao,it.getdata_nasc());
-        int anos = diff/31557600;
+        float anos = diff/31557600;
         if(anos<30) intervalo1++;
         else if(anos >= 30 && anos < 40) intervalo2++;
         else if(anos >= 40 && anos < 50) intervalo3++;
