@@ -61,6 +61,12 @@ void nao_eleitos_se_majoritario(const list<Candidatos> &listCandidatos, const in
                 cout << i << " - ";
                 it.printaCandidato();
             }
+            if(it.getVotos_Nominais() == candidatoAux->getVotos_Nominais()){
+                if(it.getdata_nasc() > candidatoAux->getdata_nasc()){
+                    cout << i << " - ";
+                    it.printaCandidato();
+                }
+            }
         }
         i++;
     }
@@ -204,7 +210,7 @@ void balanco_votos(const list <Partidos> &listVotosPartidos){
 
     cout << "Total de votos válidos:    " << totalVotos << endl;
     cout << "Total de votos nominais:   " << totalVotosNominais << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosNominais))/(static_cast <double> (totalVotos)), LOCALE_PT_BR) << "%)\n";
-    cout << "Total de votos de legenda: " << totalVotosLegenda << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosLegenda))/(static_cast <double> (totalVotos)), LOCALE_PT_BR)  << "%)\n\n\n";
+    cout << "Total de votos de legenda: " << totalVotosLegenda << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosLegenda))/(static_cast <double> (totalVotos)), LOCALE_PT_BR)  << "%)\n\n";
 }
 
 }

@@ -1,6 +1,9 @@
 #include "../include/Registrador.h"
+#include "../include/StringUtils.h"
 
 namespace registrador{
+
+using namespace cpp_util;
 
 void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidatos> &listCandidatosEleitos, map<int,Partidos> &hashMap, const char *caminho){
     fstream file;
@@ -26,6 +29,7 @@ void preenche_listas_candidatos(list<Candidatos> &listCandidatos, list<Candidato
         }
         separador[8] = line;
         if(separador[7] == "Válido"){
+            trim(separador[4]);
             Candidatos candidato(stoi(separador[0]),stoi(separador[1]),separador[2]
                                   ,separador[3],separador[4],separador[5],separador[6],stoi(separador[8]),
                                     hashMap[stoi(separador[8])].getSigla());
