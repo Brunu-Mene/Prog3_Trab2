@@ -15,7 +15,7 @@ namespace relatorios{
     void votos_partido(const list<Candidatos> &listCandidatos, const list<Partidos> &listVotosPartidos);
     void votos_de_legenda(const list<Partidos> &listVotosPartidos);
     void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &listCandidatos);
-    void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const string &dataEleicao);
+    void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const char *dataEleicao);
     void distribuicao_sexo(const list<Candidatos> &listCandidatosEleitos);
     void balanco_votos(const list <Partidos> &listVotosPartidos);
 };

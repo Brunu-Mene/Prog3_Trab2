@@ -1,4 +1,4 @@
-#include "Partidos.h"
+#include "../include/Partidos.h"
 
 Partidos::Partidos(){}
 

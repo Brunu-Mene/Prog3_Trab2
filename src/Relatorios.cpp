@@ -94,7 +94,6 @@ void votos_partido(const list<Candidatos> &listCandidatos, const list<Partidos> 
     cout << endl;
 }
 
-//tem que arrumar a historinha das viruglar aqui;
 void votos_de_legenda(const list<Partidos> &listVotosPartidos){
     int i = 1;
     cout << "Votação dos partidos (apenas votos de legenda):" << endl;
@@ -128,7 +127,7 @@ void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &
                     break;
                 }
             }
-            for (std::list<Candidatos>::reverse_iterator i = listCandidatos.rbegin(); i != listCandidatos.rend(); ++i){
+            for (list<Candidatos>::reverse_iterator i = listCandidatos.rbegin(); i != listCandidatos.rend(); ++i){
                 if(i->getNumero_Partido() == it.getNumero()){
                     menosVotados.push_back(*i);
                     break;
@@ -159,13 +158,14 @@ void primeiro_ultimo(const list<Partidos> &listVotosPartidos, list<Candidatos> &
     cout << endl;
 }
 
-void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const string &dataEleicao){
+void distribuicao_idade(const list<Candidatos> &listCandidatosEleitos, const char *dataEleicao){
     int intervalo1 = 0, intervalo2 = 0, intervalo3 = 0, intervalo4 = 0, intervalo5 = 0;
-    time_t eleicao = parseDate(dataEleicao,DATE_FORMAT_PT_BR_SHORT);
+    string stringDataEleicao = dataEleicao;
+    time_t eleicao = parseDate(stringDataEleicao,DATE_FORMAT_PT_BR_SHORT);
 
     for(const Candidatos &it : listCandidatosEleitos){
         time_t diff = difftime(eleicao,it.getdata_nasc());
-        float anos = diff/31557600;
+        float anos = diff/31557600.0;
         if(anos<30) intervalo1++;
         else if(anos >= 30 && anos < 40) intervalo2++;
         else if(anos >= 40 && anos < 50) intervalo3++;
@@ -202,9 +202,9 @@ void balanco_votos(const list <Partidos> &listVotosPartidos){
         totalVotosNominais += (it.getVotosTotal() - it.getVotosLegenda());
     }
 
-    cout <<"Total de votos válidos:    " << totalVotos << endl;
-    cout <<"Total de votos nominais:   "<< totalVotosNominais << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosNominais))/(static_cast <double> (totalVotos)), LOCALE_PT_BR) << "%)\n";
-    cout <<"Total de votos de legenda: " << totalVotosLegenda << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosLegenda))/(static_cast <double> (totalVotos)), LOCALE_PT_BR)  << "%)\n\n\n";
+    cout << "Total de votos válidos:    " << totalVotos << endl;
+    cout << "Total de votos nominais:   " << totalVotosNominais << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosNominais))/(static_cast <double> (totalVotos)), LOCALE_PT_BR) << "%)\n";
+    cout << "Total de votos de legenda: " << totalVotosLegenda << " (" << formatDoubleCurrency(100*(static_cast <double> (totalVotosLegenda))/(static_cast <double> (totalVotos)), LOCALE_PT_BR)  << "%)\n\n\n";
 }
 
 }

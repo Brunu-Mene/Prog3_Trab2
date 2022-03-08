@@ -30,8 +30,7 @@ int main(int agrv, char **agrs){
     listVotosPartidos.sort(compara_vt_vl_np());
     votos_de_legenda(listVotosPartidos);
     primeiro_ultimo(listVotosPartidos,listCandidatos);
-    string dataEleicao = "15/11/2020";
-    distribuicao_idade(listCandidatosEleitos,dataEleicao);
+    distribuicao_idade(listCandidatosEleitos,agrs[3]);
     distribuicao_sexo(listCandidatosEleitos);
     balanco_votos(listVotosPartidos);
 

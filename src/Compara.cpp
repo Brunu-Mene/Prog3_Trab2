@@ -3,7 +3,6 @@
 bool compara_candidato::operator ()(const Candidatos &c1, const Candidatos &c2){
     if(c1.getVotos_Nominais() == c2.getVotos_Nominais()){
         return c1.getdata_nasc() < c2.getdata_nasc();
-
     }
     return c1.getVotos_Nominais() > c2.getVotos_Nominais();
 }
