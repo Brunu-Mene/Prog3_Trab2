@@ -32,5 +32,6 @@ run: $(TARGET)
 	@./$(TARGET) candidatos.csv partidos.csv 15/11/2020
 
 clean:
-	-rm -f *.o
+	-rm -f *.csv
+	-rm -f $(OBJDIR)*.o
 	-rm -f $(TARGET)
